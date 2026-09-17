@@ -30,8 +30,7 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, #22252f 0%, #08090d 45%);
+      background: radial-gradient(circle at top, #22252f 0%, #08090d 45%);
       color: var(--text);
       min-height: 100vh;
     }
@@ -41,9 +40,7 @@
       text-decoration: none;
     }
 
-    button,
-    input,
-    select {
+    button, input, select {
       font: inherit;
     }
 
@@ -99,10 +96,7 @@
       border-radius: 25px;
       padding: 35px 25px;
       text-align: center;
-      background:
-        linear-gradient(135deg,
-          rgba(255,179,0,0.13),
-          rgba(255,122,0,0.04));
+      background: linear-gradient(135deg, rgba(255,179,0,0.13), rgba(255,122,0,0.04));
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
 
@@ -371,31 +365,7 @@
     }
 
     /* FOOTER */
-    footer {  </footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  const SUPABASE_URL =
-    "https://yzwfibsw...supabase.co";
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_...";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
-</script>
-
-
-<script>
-
-  /* =====================================
-     DATA PESERTA
-     ===================================== */
+    footer {
       margin-top: 50px;
       padding: 30px 0;
       border-top: 1px solid var(--line);
@@ -444,580 +414,263 @@
 </head>
 
 <body>
-
   <!-- HEADER -->
   <header>
     <div class="container nav">
       <div class="logo">
         VOTE<span>KARO</span>.ID
       </div>
-
       <button class="nav-btn" onclick="scrollToResult()">
         Hasil Voting
       </button>
     </div>
   </header>
 
-
   <!-- HERO -->
   <main>
-
     <div class="container hero">
       <div class="hero-box">
-
-        <div class="badge">
-          PLATFORM VOTING
-        </div>
-
-        <h1>
-          VOTE<span>KARO</span>.ID
-        </h1>
-
-        <p>
-          Dukung peserta favoritmu dan ikut menentukan
-          siapa yang menjadi pilihan favorit dalam event.
-        </p>
-
+        <div class="badge">PLATFORM VOTING</div>
+        <h1>VOTE<span>KARO</span>.ID</h1>
+        <p>Dukung peserta favoritmu dan ikut menentukan siapa yang menjadi pilihan favorit dalam event.</p>
       </div>
     </div>
-
 
     <!-- CATEGORY -->
     <section>
       <div class="container">
-
         <div class="section-title">
           <h2>Pilih Kategori</h2>
           <p>Pilih kategori untuk melihat peserta.</p>
         </div>
-
         <div class="categories" id="categories">
-
-          <button class="category active"
-            onclick="filterCategory('Semua', this)">
-            Semua
-          </button>
-
-          <button class="category"
-            onclick="filterCategory('Open Class', this)">
-            Tim Favorit Open Class
-          </button>
-
-          <button class="category"
-            onclick="filterCategory('Senior Class', this)">
-            Tim Favorit Senior Class
-          </button>
-
-          <button class="category"
-            onclick="filterCategory('Drum Battle', this)">
-            Tim Favorit Drum Battle
-          </button>
-
-          <button class="category"
-            onclick="filterCategory('Colorguard', this)">
-            Colorguard Contest
-          </button>
-
-          <button class="category"
-            onclick="filterCategory('Solo', this)">
-            Solo Favorit
-          </button>
-
+          <button class="category active" onclick="filterCategory('Semua', this)">Semua</button>
+          <button class="category" onclick="filterCategory('Open Class', this)">Tim Favorit Open Class</button>
+          <button class="category" onclick="filterCategory('Senior Class', this)">Tim Favorit Senior Class</button>
+          <button class="category" onclick="filterCategory('Drum Battle', this)">Tim Favorit Drum Battle</button>
+          <button class="category" onclick="filterCategory('Colorguard', this)">Colorguard Contest</button>
+          <button class="category" onclick="filterCategory('Solo', this)">Solo Favorit</button>
         </div>
-
       </div>
     </section>
-
 
     <!-- PARTICIPANTS -->
     <section>
       <div class="container">
-
         <div class="section-title">
           <h2>Peserta</h2>
           <p>Klik tombol vote untuk mendukung peserta favoritmu.</p>
         </div>
-
         <div class="search">
-          <input
-            type="text"
-            id="search"
-            placeholder="🔎 Cari nama peserta..."
-            oninput="renderParticipants()"
-          >
+          <input type="text" id="search" placeholder="🔎 Cari nama peserta..." oninput="renderParticipants()">
         </div>
-
         <div class="participants" id="participants"></div>
-
       </div>
     </section>
-
 
     <!-- RESULT -->
     <section id="result">
       <div class="container">
-
         <div class="section-title">
           <h2>Hasil Voting</h2>
           <p>Perolehan suara peserta.</p>
         </div>
-
         <div class="result-box" id="results"></div>
-
       </div>
     </section>
-
   </main>
-
 
   <!-- MODAL -->
   <div class="modal" id="voteModal">
-
     <div class="modal-box">
-
       <h2>Konfirmasi Vote</h2>
-
-      <p id="modalText">
-        Apakah kamu yakin ingin memberikan vote?
-      </p>
-
+      <p id="modalText">Apakah kamu yakin ingin memberikan vote?</p>
       <div class="modal-actions">
-
-        <button class="cancel" onclick="closeModal()">
-          Batal
-        </button>
-
-        <button class="confirm" onclick="confirmVote()">
-          YA, VOTE
-        </button>
-
+        <button class="cancel" onclick="closeModal()">Batal</button>
+        <button class="confirm" onclick="confirmVote()">YA, VOTE</button>
       </div>
-
     </div>
-
   </div>
-
 
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <strong>Votekaro.id</strong>
-      <br>
-      Platform Voting Favorit
-      <br><br>
+      <strong>Votekaro.id</strong><br>
+      Platform Voting Favorit<br><br>
       © 2026 Votekaro.id
     </div>
   </footer>
 
+  <!-- SUPABASE LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
+  <!-- MAIN SCRIPT -->
+  <script>
+    /* =====================================
+       INISIALISASI SUPABASE
+       ===================================== */
+    const SUPABASE_URL = "https://yzwfibsw...supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-  /* =====================================
-     DATA PESERTA
-     ===================================== */
+    /* =====================================
+       DATA PESERTA & STATE
+       ===================================== */
+    let participants = [
+      { id: 1, name: "Peserta Open Class 01", category: "Open Class", votes: 0, image: "01" },
+      { id: 2, name: "Peserta Open Class 02", category: "Open Class", votes: 0, image: "02" },
+      { id: 3, name: "Peserta Senior Class 01", category: "Senior Class", votes: 0, image: "01" },
+      { id: 4, name: "Peserta Senior Class 02", category: "Senior Class", votes: 0, image: "02" },
+      { id: 5, name: "Drum Battle 01", category: "Drum Battle", votes: 0, image: "01" },
+      { id: 6, name: "Drum Battle 02", category: "Drum Battle", votes: 0, image: "02" },
+      { id: 7, name: "Colorguard 01", category: "Colorguard", votes: 0, image: "01" },
+      { id: 8, name: "Colorguard 02", category: "Colorguard", votes: 0, image: "02" },
+      { id: 9, name: "Solo Favorit 01", category: "Solo", votes: 0, image: "01" },
+      { id: 10, name: "Solo Favorit 02", category: "Solo", votes: 0, image: "02" }
+    ];
 
-  const participants = [let participants = [];
-let selectedCategory = "Semua";
-let selectedParticipant = null;
+    let selectedCategory = "Semua";
+    let selectedParticipant = null;
 
-    {
-      id: 1,
-      name: "Peserta Open Class 01",
-      category: "Open Class",
-      votes: 0,
-      image: "01"
-    },
+    /* =====================================
+       LOAD DATA DARI SUPABASE
+       ===================================== */
+    async function loadParticipants() {
+      const { data, error } = await supabaseClient
+        .from("peserta")
+        .select(`id, nama, kategori, nomor_peserta, foto_url, deskripsi, jumlah_vote`)
+        .eq("status", true)
+        .order("jumlah_vote", { ascending: false });
 
-    {
-      id: 2,
-      name: "Peserta Open Class 02",
-      category: "Open Class",
-      votes: 0,
-      image: "02"
-    },
+      if (error) {
+        console.error("Gagal mengambil peserta:", error);
+        // Menggunakan data fallback (statis) jika Supabase gagal/belum dikonfigurasi sepenuhnya
+        renderParticipants();
+        renderResults();
+        return;
+      }
 
-    {
-      id: 3,
-      name: "Peserta Senior Class 01",
-      category: "Senior Class",
-      votes: 0,
-      image: "01"
-    },
+      if (data && data.length > 0) {
+        participants = data.map(p => ({
+          id: p.id,
+          name: p.nama,
+          category: p.kategori,
+          votes: p.jumlah_vote,
+          image: p.foto_url || "01"
+        }));
+      }
 
-    {
-      id: 4,
-      name: "Peserta Senior Class 02",
-      category: "Senior Class",
-      votes: 0,
-      image: "02"
-    },
-
-    {
-      id: 5,
-      name: "Drum Battle 01",
-      category: "Drum Battle",
-      votes: 0,
-      image: "01"
-    },
-
-    {
-      id: 6,
-      name: "Drum Battle 02",
-      category: "Drum Battle",
-      votes: 0,
-      image: "02"
-    },
-
-    {
-      id: 7,
-      name: "Colorguard 01",
-      category: "Colorguard",
-      votes: 0,
-      image: "01"
-    },
-
-    {
-      id: 8,
-      name: "Colorguard 02",
-      category: "Colorguard",
-      votes: 0,
-      image: "02"
-    },
-
-    {
-      id: 9,
-      name: "Solo Favorit 01",
-      category: "Solo",
-      votes: 0,
-      image: "01"
-    },
-
-    {
-      id: 10,
-      name: "Solo Favorit 02",
-      category: "Solo",
-      votes: 0,
-      image: "02"
+      renderParticipants();
+      renderResults();
     }
 
-  ];
+    /* =====================================
+       RENDER PESERTA
+       ===================================== */
+    function renderParticipants() {
+      const container = document.getElementById("participants");
+      const search = document.getElementById("search").value.toLowerCase();
 
+      let filtered = participants.filter(p => {
+        const categoryMatch = selectedCategory === "Semua" || p.category === selectedCategory;
+        const searchMatch = p.name.toLowerCase().includes(search);
+        return categoryMatch && searchMatch;
+      });
 
-  /* =====================================
-     LOAD DATA
-     ===================================== */
+      if (filtered.length === 0) {
+        container.innerHTML = `<p style="color:#aaa">Peserta tidak ditemukan.</p>`;
+        return;
+      }
 
-  let selectedCategory = "Semua";
-  let selectedParticipant = null;
-
-  const savedVotes =
-    
-/* =====================================
-   LOAD DATA DARI SUPABASE
-   ===================================== */
-
-async function loadParticipants() {
-
-  const { data, error } = await supabaseClient
-    .from("peserta")
-    .select(`
-      id,
-      nama,
-      kategori,
-      nomor_peserta,
-      foto_url,
-      deskripsi,
-      jumlah_vote
-    `)
-    .eq("status", true)
-    .order("jumlah_vote", {
-      ascending: false
-    });
-
-  if (error) {
-    console.error("Gagal mengambil peserta:", error);
-
-    document.getElementById("participants").innerHTML = `
-      <p style="color:#ff4d5a">
-        Gagal memuat data peserta.
-      </p>
-    `;
-
-    return;
-  }
-
-  participants = data.map(p => ({
-    id: p.id,
-    name: p.nama,
-    category: p.kategori,
-    votes: p.jumlah_vote,
-    image: p.foto_url || "01"
-  }));
-
-  renderParticipants();
-  renderResults();
-}
-  /* =====================================
-     RENDER PESERTA
-     ===================================== */
-
-  function renderParticipants() {
-
-    const container =
-      document.getElementById("participants");
-
-    const search =
-      document.getElementById("search").value
-      .toLowerCase();
-
-    let filtered = participants.filter(p => {
-
-      const categoryMatch =
-        selectedCategory === "Semua" ||
-        p.category === selectedCategory;
-
-      const searchMatch =
-        p.name.toLowerCase().includes(search);
-
-      return categoryMatch && searchMatch;
-
-    });
-
-
-    if (filtered.length === 0) {
-
-      container.innerHTML = `
-        <p style="color:#aaa">
-          Peserta tidak ditemukan.
-        </p>
-      `;
-
-      return;
-    }
-
-
-    container.innerHTML =
-      filtered.map(p => `
-
+      container.innerHTML = filtered.map(p => `
         <div class="participant">
-
-          <div class="participant-image">
-            ${p.image}
-          </div>
-
+          <div class="participant-image">${p.image}</div>
           <div class="participant-content">
-
-            <div class="participant-category">
-              ${p.category}
-            </div>
-
-            <h3>
-              ${p.name}
-            </h3>
-
-            <div class="votes">
-              ${p.votes} suara
-            </div>
-
-            <button
-              class="vote-btn"
-              onclick="openVote(${p.id})">
-
-              ❤️ VOTE SEKARANG
-
-            </button>
-
+            <div class="participant-category">${p.category}</div>
+            <h3>${p.name}</h3>
+            <div class="votes">${p.votes} suara</div>
+            <button class="vote-btn" onclick="openVote(${p.id})">❤️ VOTE SEKARANG</button>
           </div>
-
         </div>
-
       `).join("");
+    }
 
-  }
+    /* =====================================
+       FILTER & MODAL
+       ===================================== */
+    function filterCategory(category, button) {
+      selectedCategory = category;
+      document.querySelectorAll(".category").forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+      renderParticipants();
+    }
 
+    function openVote(id) {
+      selectedParticipant = participants.find(p => p.id === id);
+      document.getElementById("modalText").innerHTML = `Kamu akan memberikan vote kepada <strong style="color:#ffb300">${selectedParticipant.name}</strong>.<br><br>Lanjutkan voting?`;
+      document.getElementById("voteModal").classList.add("show");
+    }
 
-  /* =====================================
-     FILTER
-     ===================================== */
+    function closeModal() {
+      document.getElementById("voteModal").classList.remove("show");
+      selectedParticipant = null;
+    }
 
-  function filterCategory(category, button) {
+    /* =====================================
+       CONFIRM VOTE
+       ===================================== */
+    function confirmVote() {
+      if (!selectedParticipant) return;
 
-    selectedCategory = category;
+      selectedParticipant.votes++;
+      const voteData = {};
+      participants.forEach(p => { voteData[p.id] = p.votes; });
 
-    document
-      .querySelectorAll(".category")
-      .forEach(btn => {
-        btn.classList.remove("active");
-      });
+      localStorage.setItem("votekaro_votes", JSON.stringify(voteData));
 
-    button.classList.add("active");
+      // Catatan: Jika ingin menggunakan database cloud secara real-time,
+      // tambahkan fungsi UPDATE (misal: UPDATE jumlah_vote ke Supabase) di sini.
 
-    renderParticipants();
+      closeModal();
+      renderParticipants();
+      renderResults();
 
-  }
+      alert("Vote berhasil diberikan untuk " + selectedParticipant.name);
+    }
 
+    /* =====================================
+       RESULT & SCROLL
+       ===================================== */
+    function renderResults() {
+      const container = document.getElementById("results");
+      const sorted = [...participants].sort((a,b) => b.votes - a.votes);
+      const maxVotes = Math.max(...participants.map(p => p.votes), 1);
 
-  /* =====================================
-     OPEN MODAL
-     ===================================== */
-
-  function openVote(id) {
-
-    selectedParticipant =
-      participants.find(p => p.id === id);
-
-    document.getElementById("modalText").innerHTML =
-
-      `Kamu akan memberikan vote kepada
-      <strong style="color:#ffb300">
-      ${selectedParticipant.name}
-      </strong>.
-      <br><br>
-      Lanjutkan voting?`;
-
-    document
-      .getElementById("voteModal")
-      .classList.add("show");
-
-  }
-
-
-  /* =====================================
-     CLOSE MODAL
-     ===================================== */
-
-  function closeModal() {
-
-    document
-      .getElementById("voteModal")
-      .classList.remove("show");
-
-    selectedParticipant = null;
-
-  }
-
-
-  /* =====================================
-     CONFIRM VOTE
-     ===================================== */
-
-  function confirmVote() {
-
-    if (!selectedParticipant) return;
-
-
-    selectedParticipant.votes++;
-
-
-    const voteData = {};
-
-    participants.forEach(p => {
-      voteData[p.id] = p.votes;
-    });
-
-
-    localStorage.setItem(
-      "votekaro_votes",
-      JSON.stringify(voteData)
-    );
-
-
-    closeModal();
-
-    renderParticipants();
-
-    renderResults();
-
-
-    alert(
-      "Vote berhasil diberikan untuk " +
-      selectedParticipant.name
-    );
-
-  }
-
-
-  /* =====================================
-     RESULT
-     ===================================== */
-
-  function renderResults() {
-
-    const container =
-      document.getElementById("results");
-
-
-    const sorted =
-      [...participants]
-      .sort((a,b) => b.votes - a.votes);
-
-
-    const maxVotes =
-      Math.max(...participants.map(p => p.votes), 1);
-
-
-    container.innerHTML =
-      sorted.map((p,index) => {
-
-        const percentage =
-          (p.votes / maxVotes) * 100;
-
+      container.innerHTML = sorted.map((p,index) => {
+        const percentage = (p.votes / maxVotes) * 100;
         return `
-
           <div class="result-row">
-
             <div class="result-head">
-
-              <span>
-                ${index + 1}. ${p.name}
-              </span>
-
-              <strong>
-                ${p.votes} suara
-              </strong>
-
+              <span>${index + 1}. ${p.name}</span>
+              <strong>${p.votes} suara</strong>
             </div>
-
             <div class="bar">
-
-              <span
-                style="width:${percentage}%">
-              </span>
-
+              <span style="width:${percentage}%"></span>
             </div>
-
           </div>
-
         `;
-
       }).join("");
+    }
 
-  }
+    function scrollToResult() {
+      document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+    }
 
-
-  /* =====================================
-     SCROLL RESULT
-     ===================================== */
-
-  function scrollToResult() {
-
-    document
-      .getElementById("result")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
-
-
-  /* =====================================
-     START
-     ===================================== */
-
-  renderParticipants();
-  renderResults();
-
-</script>
-
+    /* =====================================
+       START
+       ===================================== */
+    // Panggil loadParticipants() untuk mengambil data dari Supabase (atau fallback ke data statis)
+    loadParticipants();
+  </script>
 </body>
 </html>
