@@ -711,21 +711,52 @@ let selectedParticipant = null;
   let selectedParticipant = null;
 
   const savedVotes =
-    JSON.parse(localStorage.getItem("votekaro_votes"));
+    
+/* =====================================
+   LOAD DATA DARI SUPABASE
+   ===================================== */
 
-  if (savedVotes) {
+async function loadParticipants() {
 
-    participants.forEach(p => {
-
-      if (savedVotes[p.id] !== undefined) {
-        p.votes = savedVotes[p.id];
-      }
-
+  const { data, error } = await supabaseClient
+    .from("peserta")
+    .select(`
+      id,
+      nama,
+      kategori,
+      nomor_peserta,
+      foto_url,
+      deskripsi,
+      jumlah_vote
+    `)
+    .eq("status", true)
+    .order("jumlah_vote", {
+      ascending: false
     });
 
+  if (error) {
+    console.error("Gagal mengambil peserta:", error);
+
+    document.getElementById("participants").innerHTML = `
+      <p style="color:#ff4d5a">
+        Gagal memuat data peserta.
+      </p>
+    `;
+
+    return;
   }
 
+  participants = data.map(p => ({
+    id: p.id,
+    name: p.nama,
+    category: p.kategori,
+    votes: p.jumlah_vote,
+    image: p.foto_url || "01"
+  }));
 
+  renderParticipants();
+  renderResults();
+}
   /* =====================================
      RENDER PESERTA
      ===================================== */
